@@ -39,7 +39,6 @@ func New(url string, opts ...Option) (*Mysql, error) {
 		opt(m)
 	}
 
-	// MySQL menggunakan Question Mark (?) sebagai placeholder, bukan Dollar ($)
 	m.Builder = squirrel.StatementBuilder.PlaceholderFormat(squirrel.Question)
 
 	db, err := sql.Open("mysql", url)
@@ -47,7 +46,6 @@ func New(url string, opts ...Option) (*Mysql, error) {
 		return nil, fmt.Errorf("mysql - New - sql.Open: %w", err)
 	}
 
-	// Konfigurasi Connection Pool
 	db.SetMaxOpenConns(m.maxPoolSize)
 	db.SetMaxIdleConns(m.maxPoolSize)
 	db.SetConnMaxLifetime(time.Hour)

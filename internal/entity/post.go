@@ -8,9 +8,9 @@ type PostStatus string
 
 // Post status types based on requirements.
 const (
-	StatusPublish PostStatus = "Publish"
-	StatusDraft   PostStatus = "Draft"
-	StatusThrash  PostStatus = "Thrash"
+	StatusPublish PostStatus = "publish"
+	StatusDraft   PostStatus = "draft"
+	StatusThrash  PostStatus = "thrash"
 )
 
 // Post represents a post entity in the article database.

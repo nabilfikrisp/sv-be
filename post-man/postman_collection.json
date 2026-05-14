@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "45307f1e-ad79-4339-8a81-2740a75f1865",
+		"name": "sharing-vision",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18395792"
+	},
+	"item": [
+		{
+			"name": "Post Article",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJuYWJpbCIsImlhdCI6MTc1NjU0MTE3NSwiZXhwIjoxNzU3MTQ1OTc1fQ.vcQ3GTlVP72ev-QFMFSrsyk2MTNf86xnSdgDQtNNThM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"category\": \"programming 2\",\r\n  \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lorem sollicitudin, sagittis turpis ut, fermentum orci. Donec sollicitudin gravida lacus, eget interdum dui convallis et. Donec at gravida..\",\r\n  \"status\": \"publish\",\r\n  \"title\": \"how to learn go programming\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/article",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"article"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJuYWJpbCIsImlhdCI6MTc1NjU0MTE3NSwiZXhwIjoxNzU3MTQ1OTc1fQ.vcQ3GTlVP72ev-QFMFSrsyk2MTNf86xnSdgDQtNNThM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"category\": \"programming 2\",\r\n  \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lorem sollicitudin, sagittis turpis ut, fermentum orci. Donec sollicitudin gravida lacus, eget interdum dui convallis et. Donec at gravida..\",\r\n  \"status\": \"publish\",\r\n  \"title\": \"how to learn go programming\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/article",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"article"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 May 2026 06:29:30 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "410"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"title\": \"how to learn go programming\",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lorem sollicitudin, sagittis turpis ut, fermentum orci. Donec sollicitudin gravida lacus, eget interdum dui convallis et. Donec at gravida..\",\n    \"category\": \"programming 2\",\n    \"created_date\": \"2026-05-14T06:29:30.11936926Z\",\n    \"updated_date\": \"2026-05-14T06:29:30.11936926Z\",\n    \"status\": \"publish\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/article?status&limit&offset",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"article"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": null,
+							"description": "publish, draft, thrash"
+						},
+						{
+							"key": "limit",
+							"value": null
+						},
+						{
+							"key": "offset",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/article?status&limit&offset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"article"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": null,
+									"description": "publish, draft, thrash"
+								},
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "offset",
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 May 2026 06:31:15 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1256"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"posts\": [\n        {\n            \"id\": 3,\n            \"title\": \"how to learn go programming\",\n            \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lorem sollicitudin, sagittis turpis ut, fermentum orci. Donec sollicitudin gravida lacus, eget interdum dui convallis et. Donec at gravida..\",\n            \"category\": \"programming 2\",\n            \"created_date\": \"2026-05-14T06:30:22.234538596Z\",\n            \"updated_date\": \"2026-05-14T06:30:22.234538596Z\",\n            \"status\": \"publish\"\n        },\n        {\n            \"id\": 2,\n            \"title\": \"how to learn go programming\",\n            \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lorem sollicitudin, sagittis turpis ut, fermentum orci. Donec sollicitudin gravida lacus, eget interdum dui convallis et. Donec at gravida..\",\n            \"category\": \"programming 2\",\n            \"created_date\": \"2026-05-14T06:29:30.11936926Z\",\n            \"updated_date\": \"2026-05-14T06:29:30.11936926Z\",\n            \"status\": \"publish\"\n        },\n        {\n            \"id\": 1,\n            \"title\": \"how to learn go programming\",\n            \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lorem sollicitudin, sagittis turpis ut, fermentum orci. Donec sollicitudin gravida lacus, eget interdum dui convallis et. Donec at gravida..\",\n            \"category\": \"programming\",\n            \"created_date\": \"2026-05-14T06:26:23.138540071Z\",\n            \"updated_date\": \"2026-05-14T06:26:23.138540071Z\",\n            \"status\": \"publish\"\n        }\n    ],\n    \"total\": 3\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Post By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/article/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"article",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 May 2026 06:31:52 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "410"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"title\": \"how to learn go programming\",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lorem sollicitudin, sagittis turpis ut, fermentum orci. Donec sollicitudin gravida lacus, eget interdum dui convallis et. Donec at gravida..\",\n    \"category\": \"programming 2\",\n    \"created_date\": \"2026-05-14T06:29:30.11936926Z\",\n    \"updated_date\": \"2026-05-14T06:29:30.11936926Z\",\n    \"status\": \"publish\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Post",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"status\": \"draft\",\r\n  \"title\": \"updated title to new title\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"draft\",\r\n  \"title\": \"updated title to new title\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/article/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"article",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 May 2026 06:34:07 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "409"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"title\": \"updated title to new title\",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lorem sollicitudin, sagittis turpis ut, fermentum orci. Donec sollicitudin gravida lacus, eget interdum dui convallis et. Donec at gravida..\",\n    \"category\": \"programming 2\",\n    \"created_date\": \"2026-05-14T06:32:38.351394213Z\",\n    \"updated_date\": \"2026-05-14T06:34:07.492846452Z\",\n    \"status\": \"draft\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/article/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"article",
+								"1"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 14 May 2026 06:34:57 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}

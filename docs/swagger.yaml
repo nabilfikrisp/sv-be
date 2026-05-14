@@ -1,0 +1,261 @@
+basePath: /v1
+definitions:
+  entity.Post:
+    properties:
+      category:
+        example: Programming
+        type: string
+      content:
+        example: The content of the article goes here...
+        type: string
+      created_date:
+        example: "2026-05-14T11:38:11Z"
+        type: string
+      id:
+        example: 1
+        type: integer
+      status:
+        allOf:
+        - $ref: '#/definitions/github_com_nabilfikrisp_sv-be_internal_entity.PostStatus'
+        example: Publish
+      title:
+        example: How to Learn Go
+        type: string
+      updated_date:
+        example: "2026-05-14T11:38:11Z"
+        type: string
+    type: object
+  github_com_nabilfikrisp_sv-be_internal_entity.PostStatus:
+    enum:
+    - publish
+    - draft
+    - thrash
+    type: string
+    x-enum-varnames:
+    - StatusPublish
+    - StatusDraft
+    - StatusThrash
+  v1.CreatePost:
+    properties:
+      category:
+        example: programming
+        maxLength: 100
+        minLength: 3
+        type: string
+      content:
+        example: Lorem ipsum dolor sit amet...
+        minLength: 200
+        type: string
+      status:
+        allOf:
+        - $ref: '#/definitions/github_com_nabilfikrisp_sv-be_internal_entity.PostStatus'
+        enum:
+        - publish
+        - draft
+        - thrash
+        example: publish
+      title:
+        example: how to learn go programming
+        maxLength: 200
+        minLength: 20
+        type: string
+    required:
+    - category
+    - content
+    - status
+    - title
+    type: object
+  v1.Error:
+    properties:
+      error:
+        example: message
+        type: string
+    type: object
+  v1.UpdatePost:
+    properties:
+      category:
+        example: updated category
+        maxLength: 100
+        minLength: 3
+        type: string
+      content:
+        example: updated content...
+        minLength: 200
+        type: string
+      status:
+        allOf:
+        - $ref: '#/definitions/github_com_nabilfikrisp_sv-be_internal_entity.PostStatus'
+        enum:
+        - publish
+        - draft
+        - thrash
+        example: draft
+      title:
+        example: updated title
+        maxLength: 200
+        minLength: 20
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API for Go Post Article
+  title: Go Post Article
+  version: "1.0"
+paths:
+  /article:
+    get:
+      description: Retrieve a paginated list of posts with optional filtering
+      parameters:
+      - description: Filter by status (publish, draft, thrash)
+        in: query
+        name: status
+        type: string
+      - description: Page limit (default 10)
+        in: query
+        name: limit
+        type: integer
+      - description: Page offset (default 0)
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'Returns {posts: []entity.Post, total: int}'
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.Error'
+      summary: List posts
+      tags:
+      - posts
+    post:
+      consumes:
+      - application/json
+      description: Create a post with the provided details
+      parameters:
+      - description: Create Post Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.CreatePost'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entity.Post'
+        "400":
+          description: Invalid request or validation error
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/v1.Error'
+      summary: Create a new post
+      tags:
+      - posts
+  /article/{id}:
+    delete:
+      description: Remove a post from the system by ID
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.Error'
+      summary: Delete a post
+      tags:
+      - posts
+    get:
+      description: Retrieve details of a single post using its unique ID
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Post'
+        "400":
+          description: Invalid ID
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "404":
+          description: Post not found
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/v1.Error'
+      summary: Get a post by ID
+      tags:
+      - posts
+    patch:
+      consumes:
+      - application/json
+      description: Update existing post details by ID
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Post Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.UpdatePost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Post'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.Error'
+      summary: Update a post
+      tags:
+      - posts
+swagger: "2.0"
