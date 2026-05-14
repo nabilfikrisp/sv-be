@@ -1,4 +1,4 @@
-package repo
+package usecase
 
 import (
 	"context"
@@ -8,11 +8,11 @@ import (
 )
 
 type (
-	PostRepository interface {
-		Store(ctx context.Context, post *entity.Post) error
+	Post interface {
+		Create(ctx context.Context, req dto.PostCreate) (entity.Post, error)
 		GetByID(ctx context.Context, id int) (entity.Post, error)
 		List(ctx context.Context, filter dto.PostFilter) ([]entity.Post, int, error)
-		Update(ctx context.Context, id int, patch dto.PostUpdate) error
+		Update(ctx context.Context, id int, req dto.PostUpdate) (entity.Post, error)
 		Delete(ctx context.Context, id int) error
 	}
 )

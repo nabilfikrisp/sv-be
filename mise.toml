@@ -1,0 +1,5 @@
+[tools]
+go = "1.26.3"
+air = "latest"
+golangci-lint = "2.12.2"
+gomigrate = "4.19.1"
