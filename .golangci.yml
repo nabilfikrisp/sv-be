@@ -1,0 +1,61 @@
+# Schema version of the configuration file. v2 is the current major version.
+version: "2"
+
+run:
+  # Maximum time golangci-lint is allowed to run before being cancelled.
+  # Accepts Go duration format (e.g. 30s, 5m, 1h).
+  timeout: 5m
+
+  # Whether to analyze _test.go files alongside regular source files.
+  tests: true
+
+  # Base path used to resolve relative paths in issue reports and exclusion rules.
+  # Options: gomod (relative to go.mod), gitroot, cfg (relative to this file), wd.
+  relative-path-mode: gomod
+
+  # Exit code returned when at least one issue is found.
+  issues-exit-code: 1
+
+# Controls how lint results are reported to the user.
+output:
+  # One or more output formats. Each format can target stdout, stderr, or a file path.
+  formats:
+    text:
+      path: stdout
+      # Append the name of the linter that reported each issue.
+      print-linter-name: true
+      # Include the offending source line in the output.
+      print-issued-lines: true
+  # Order in which issues are grouped and displayed.
+  sort-order:
+    - linter
+    - file
+
+linters:
+  # Baseline set of linters to start from before applying enable/disable.
+  # Options: standard, all, none, fast.
+  default: standard
+
+  # Linters enabled in addition to the default set.
+  enable:
+    - bodyclose # Ensures HTTP response bodies are closed.
+    - errcheck # Detects unchecked errors returned from function calls.
+    - errorlint # Flags error handling that is incompatible with Go 1.13 error wrapping.
+    - gocheckcompilerdirectives # Validates the syntax of //go: compiler directives.
+    - gocritic # Provides a wide range of diagnostic, style, and performance checks.
+    - gocyclo # Reports functions whose cyclomatic complexity exceeds a threshold.
+    - goconst # Finds repeated string literals that could be extracted into constants.
+    - gosec # Scans source code for common security issues.
+    - govet # Runs the standard `go vet` analyzers.
+    - ineffassign # Detects assignments to variables that are never used afterwards.
+    - misspell # Finds commonly misspelled English words in comments and strings.
+    - nakedret # Discourages naked returns in long functions.
+    - nilerr # Flags code that returns nil even when an error was found.
+    - noctx # Ensures HTTP requests are sent with a context.
+    - nolintlint # Enforces consistent and well-formed //nolint directives.
+    - prealloc # Suggests preallocating slices when their final size is known.
+    - revive # Configurable, drop-in replacement for golint.
+    - staticcheck # Comprehensive set of static analysis checks.
+    - unconvert # Removes unnecessary type conversions.
+    - unparam # Reports unused function parameters and constant return values.
+    - unused # Detects unused constants, variables, funct<span class="ml-2" /><span class="inline-block w-3 h-3 rounded-full bg-neutral-a12 align-middle mb-[0.1rem]" />
