@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/Masterminds/squirrel"
@@ -41,7 +42,9 @@ func New(url string, opts ...Option) (*Mysql, error) {
 
 	m.Builder = squirrel.StatementBuilder.PlaceholderFormat(squirrel.Question)
 
-	db, err := sql.Open("mysql", url)
+	dsn := strings.TrimPrefix(url, "mysql://")
+
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return nil, fmt.Errorf("mysql - New - sql.Open: %w", err)
 	}

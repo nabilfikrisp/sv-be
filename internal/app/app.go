@@ -9,12 +9,11 @@ import (
 
 	"github.com/nabilfikrisp/sv-be/config"
 	"github.com/nabilfikrisp/sv-be/internal/controller/restapi"
-	"github.com/nabilfikrisp/sv-be/internal/repo/inmem"
-	// "github.com/nabilfikrisp/sv-be/internal/repo/persistent"
+	"github.com/nabilfikrisp/sv-be/internal/repo/persistent"
 	"github.com/nabilfikrisp/sv-be/internal/usecase/post"
 	"github.com/nabilfikrisp/sv-be/pkg/httpserver"
 	"github.com/nabilfikrisp/sv-be/pkg/logger"
-	// "github.com/nabilfikrisp/sv-be/pkg/mysql"
+	"github.com/nabilfikrisp/sv-be/pkg/mysql"
 )
 
 type useCases struct {
@@ -25,8 +24,8 @@ type servers struct {
 	http *httpserver.Server
 }
 
-func initUseCases() useCases {
-	postRepo := inmem.NewPostInMemRepo()
+func initUseCases(mysql *mysql.Mysql) useCases {
+	postRepo := persistent.NewPostMysqlRepo(mysql)
 
 	return useCases{
 		post: post.New(postRepo),
@@ -72,15 +71,13 @@ func (s *servers) shutdownServers(l logger.Interface) {
 func Run(cfg *config.Config) {
 	l := logger.New(cfg.Log.Level)
 
-	// Repository
-	// mysql, err := mysql.New(cfg.MySQL.URL, mysql.MaxPoolSize(cfg.MySQL.PoolMax))
-	// if err != nil {
-	// 	l.Fatal(fmt.Errorf("app - Run - mysql.New: %w", err))
-	// }
-	// defer mysql.Close()
+	mysql, err := mysql.New(cfg.MySQL.URL, mysql.MaxPoolSize(cfg.MySQL.PoolMax))
+	if err != nil {
+		l.Fatal(fmt.Errorf("app - Run - mysql.New: %w", err))
+	}
+	defer mysql.Close()
 
-	// uc := initUseCases(mysql)
-	uc := initUseCases()
+	uc := initUseCases(mysql)
 	s := initServer(cfg, uc, l)
 	s.startServers()
 	s.waitForShutdown(l)

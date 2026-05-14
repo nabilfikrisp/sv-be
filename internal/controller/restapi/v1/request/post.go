@@ -8,17 +8,17 @@ import (
 
 // CreatePost -.
 type CreatePost struct {
-	Title    string           `json:"title"    validate:"required,min=20,max=200"                           example:"how to learn go programming"`
-	Content  string           `json:"content"  validate:"required,min=200"                                   example:"Lorem ipsum dolor sit amet..."`
-	Category string           `json:"category" validate:"required,min=3,max=100"                              example:"programming"`
+	Title    string            `json:"title"    validate:"required,min=20,max=200"                           example:"how to learn go programming"`
+	Content  string            `json:"content"  validate:"required,min=200"                                   example:"Lorem ipsum dolor sit amet..."`
+	Category string            `json:"category" validate:"required,min=3,max=100"                              example:"programming"`
 	Status   entity.PostStatus `json:"status"  validate:"required,oneof=publish draft thrash" example:"publish"`
 } // @name v1.CreatePost
 
 // UpdatePost -.
 type UpdatePost struct {
-	Title    *string          `json:"title"    validate:"omitempty,min=20,max=200"                          example:"updated title"`
-	Content  *string          `json:"content"  validate:"omitempty,min=200"                                example:"updated content..."`
-	Category *string          `json:"category" validate:"omitempty,min=3,max=100"                             example:"updated category"`
+	Title    *string            `json:"title"    validate:"omitempty,min=20,max=200"                          example:"updated title"`
+	Content  *string            `json:"content"  validate:"omitempty,min=200"                                example:"updated content..."`
+	Category *string            `json:"category" validate:"omitempty,min=3,max=100"                             example:"updated category"`
 	Status   *entity.PostStatus `json:"status"  validate:"omitempty,oneof=publish draft thrash" example:"draft"`
 } // @name v1.UpdatePost
 
